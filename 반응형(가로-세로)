@@ -1,0 +1,83 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Responsive Layout',
+      home: ResponsivePage(),
+    );
+  }
+}
+
+class ResponsivePage extends StatelessWidget {
+  const ResponsivePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Responsive Layout'),
+      ),
+      body: OrientationBuilder(
+        builder: (context, orientation) {
+          if (orientation == Orientation.portrait) {
+            // 세로 화면 UI
+            return PortraitLayout();
+          } else {
+            // 가로 화면 UI
+            return LandscapeLayout();
+          }
+        },
+      ),
+    );
+  }
+}
+
+class PortraitLayout extends StatelessWidget {
+  const PortraitLayout({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.smartphone, size: 100, color: Colors.blue),
+          SizedBox(height: 20),
+          Text(
+            '세로 화면입니다!',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class LandscapeLayout extends StatelessWidget {
+  const LandscapeLayout({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.desktop_windows, size: 100, color: Colors.green),
+          SizedBox(width: 20),
+          Text(
+            '가로 화면입니다!',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
+}
