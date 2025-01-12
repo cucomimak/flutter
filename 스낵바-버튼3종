@@ -32,6 +32,8 @@ class SnackBarDemo extends StatelessWidget {
       ),
       body: Center(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextButton(
               onPressed: () {
