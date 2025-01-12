@@ -1,0 +1,55 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'SnackBar Example',
+      home: SnackBarDemo(),
+    );
+  }
+}
+
+class SnackBarDemo extends StatelessWidget {
+  const SnackBarDemo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('SnackBar Example'),
+      ),
+      body: Center(
+        child: TextButton(
+          onPressed: () {
+            // 스낵바 표시
+            ScaffoldMessenger.of(context).showSnackBar(
+               SnackBar(
+                content: const Text('버튼이 클릭되었어요!'),
+                duration: const Duration(seconds: 10), // 스낵바 표시 시간
+                backgroundColor: Colors.grey,
+                action: SnackBarAction(
+                    label: '취소',
+                    onPressed: (){
+                      //ScaffoldMessenger.of(context).hideCurrentSnackBar(); //SnackBarAction은 기본적으로 snackbar를 종료하는 기능을 갖고 있음.
+                      print('스낵바 동작 버튼 클릭!');
+                    },
+                ),
+              ),
+            );
+          },
+          child: const Text(
+            '클릭하세요',
+            style: TextStyle(fontSize: 18),
+          ),
+        ),
+      ),
+    );
+  }
+}
