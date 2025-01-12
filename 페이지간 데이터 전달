@@ -1,0 +1,84 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Data Passing Example',
+      home: InputPage(),
+    );
+  }
+}
+
+class InputPage extends StatelessWidget {
+  // TextEditingController로 텍스트 입력 값 관리
+  final TextEditingController textController = TextEditingController();
+
+  InputPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Input Page'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            // 텍스트박스
+            TextField(
+              controller: textController,
+              decoration: const InputDecoration(
+                labelText: 'Enter some text',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 20),
+            // 버튼 클릭 시 다음 페이지로 데이터 전달
+            ElevatedButton(
+              onPressed: () {
+                final inputData = textController.text; // 입력값 가져오기
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DisplayPage(data: inputData),
+                  ),
+                );
+              },
+              child: const Text('Submit'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DisplayPage extends StatelessWidget {
+  final String data; // 전달받을 데이터
+
+  // 생성자를 통해 데이터 받기
+  DisplayPage({super.key, required this.data});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Display Page'),
+      ),
+      body: Center(
+        child: Text(
+          'You entered: $data', // 전달받은 데이터 출력
+          style: const TextStyle(fontSize: 24),
+        ),
+      ),
+    );
+  }
+}
